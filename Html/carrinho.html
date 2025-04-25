@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/Carrinho.css">
+    <link rel="icon" href="..//icons/cart-plus-solid.png" >
+    <title>Carrinho de Compras</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html"><img src="..//icons/home-solid.png" width="25" height="25" title="index"></a>
+            <a href="login.html"><img src="..//icons/user-solid.png" width="25" height="25" title="login"></a>
+            <a href="contato.html"><img src="..//icons/address-book-regular.png" width="25" height="25" title="contato"></a>
+            <a href="carrinho.html"><img src="..//icons/cart-plus-solid-blue.png" width="25" height="25" title="carrinho"  style="color: rgb(71, 71, 255);"></a>
+            <a href="sobre.html"><img src="..//icons/paperclip-solid.png" width="25" height="25" title="sobre"></a>
+            <a href="novidades.html"><img src="..//icons/bell-solid.png" width="25" height="25" title="novidades"></a>
+
+        </nav>
+    </header>
+    
+    <main>
+        <h1>Carrinho de Compras</h1>
+        
+        <div id="cartItems"></div>
+    
+        <button id="confirmarBtn" class="confirmar-button" onclick="window.location.href='final_compra.html'" style="display: none;">
+            Confirmar Pedido
+        </button>
+    
+        <button class="btn" onclick="clearCart()">
+            <h4> Limpar carrinho </h4>
+        </button>
+    </main>
+    
+    <script>
+        function displayCart() {
+            const cart = JSON.parse(localStorage.getItem('carrinhu')) || [];
+            const cartItemsDiv = document.getElementById('cartItems');
+            const confirmarBtn = document.getElementById('confirmarBtn');
+    
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p>Seu carrinho está vazio!</p>';
+                confirmarBtn.style.display = 'none';
+            } else {
+                cartItemsDiv.innerHTML = '';
+                confirmarBtn.style.display = 'inline-block';
+                cart.forEach((item, index) => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('cart-item');
+                    itemDiv.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div>
+                            <strong>${item.name}</strong>
+                            <p>R$ ${item.price.toFixed(2)}</p>
+                            <button class="remove-btn" onclick="removeItem(${index})">Remover</button>
+                        </div>
+                    `;
+                    cartItemsDiv.appendChild(itemDiv);
+                });
+            }
+        }
+    
+        function removeItem(index) {
+            const cart = JSON.parse(localStorage.getItem('carrinhu')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('carrinhu', JSON.stringify(cart));
+            displayCart(); 
+        }
+    
+        function clearCart() {
+            localStorage.removeItem('carrinhu');
+            displayCart();
+        }
+    
+        window.onload = displayCart;
+    </script>
+    
+
+</body>
+</html>

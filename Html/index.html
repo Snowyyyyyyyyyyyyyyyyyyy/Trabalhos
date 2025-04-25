@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doceria</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="..//icons/home-solid.png" >
+    <script defer>
+        function addToCart(name, price, image) {
+            const product = {
+                name: name,
+                price: price,
+                image: image
+            };
+
+            let cart = JSON.parse(localStorage.getItem('carrinhu')) || [];
+
+            cart.push(product);
+
+            localStorage.setItem('carrinhu', JSON.stringify(cart));
+
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html"><img src="..//icons/home-solid-blue.png" width="25" height="25" title="index"></a>
+            <a href="login.html"><img src="..//icons/user-solid.png" width="25" height="25" title="login"></a>
+            <a href="contato.html"><img src="..//icons/address-book-regular.png" width="25" height="25" title="contato"></a>
+            <a href="carrinho.html"><img src="..//icons/cart-plus-solid.png" width="25" height="25" title="carrinho"  style="color: rgb(71, 71, 255);"></a>
+            <a href="sobre.html"><img src="..//icons/paperclip-solid.png" width="25" height="25" title="sobre"></a>
+            <a href="novidades.html"><img src="..//icons/bell-solid.png" width="25" height="25" title="novidades"></a>
+        </nav>
+        <img src="..//icons/nin" alt="">
+    </header>
+    <main class="home">
+        <div class="produto">
+            <img src="..//icons/ninho.png" alt="Produto 1">
+            <h3>Cupcake Ninho</h3>
+            <p>É um cupcake feito com massa a base de ninho com chantily.</p>
+            <div class="price">R$ 15,99</div>
+            <button class="button" onclick="addToCart('Cupcake Ninho', 16, '../icons/ninho.png')">
+                Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto">
+            <img src="..//icons/brigadeirao.png" alt="Produto 2">
+            <h3>Brigadeirão</h3>
+            <p>É um brigadeiro feito com chocolate 70% cacau.</p>
+            <div class="price">R$ 9,99</div>
+            <button class="button" onclick="addToCart('Brigadeirão', 10, '../icons/brigadeirao.png')">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto">
+            <img src="..//icons/pudim.png" alt="Produto 1">
+            <h3>Pudim</h3>
+            <p>Feito com leite condensado da melhor qualidade para agradar o seu paladar!.</p>
+            <div class="price">R$ 13,99</div>
+            <button class="button" onclick="addToCart('Pudim', 14, '../icons/pudim.png')">Adicionar ao Carrinho</button>
+        </div>
+
+        <div class="produto">
+            <img src="..//icons/bolodepote.png" alt="Produto 1">
+            <h3>Bolo de pote</h3>
+            <p>Bolos de sabores variados para melhorar sua vida!</p>
+            <div class="price">R$ 19,99</div>
+            <button class="button" onclick="addToCart('Bolo de pote', 20, '../icons/bolodepote.png')">Adicionar ao Carrinho</button>
+        </div>
+    </main>
+</body>
+</html>
